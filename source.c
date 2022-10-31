@@ -1,5 +1,4 @@
 #include <stdio.h>
-#include "newLibraryV1.h"
 #include <time.h>
 #include <stdlib.h>
 #include <locale.h>
@@ -107,7 +106,7 @@ int main(){
     setlocale(LC_ALL,""); // Enable special characters.*Some devices won't work! <locale.h>
 
     int pass_length = returnPassLength(); // The length of the password that will be defined by the user.
-    const int array_length = returnSizeArray(data_allowed); // The constant that will store the size of the vector. The function used for this purpose was made in stringLibrary.h.
+    const int array_length = sizeof(data_allowed - 1 ); // The constant that will store the size of the vector. The function used for this purpose was made in stringLibrary.h.
     char array_aux[pass_length]; // The auxiliary array that will be used to create the password file.
 
     generatePassword(array_aux,pass_length,array_length); 
