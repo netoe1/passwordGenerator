@@ -3,43 +3,29 @@
 #include <time.h>
 #include <locale.h>
 
-#define MAX 255
-#define MIN 33
-#define LEN 10
 
-void generateFile(const char *buf);
-int main()
-{
+#define __SZPASS 10
+char buf01[__SZPASS];
+const char *__DATALL =
+{"ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz1234567890!@#$%¨&*()"};
+
+void generateFile();
+
+int main(){
+	srand(time(NULL));
 	
-	static char buf[LEN];
-    setlocale(LC_ALL,"");
-    srand(time(NULL));
-
-    int i;
-    int randal;
-
-    for(i = 0; i < LEN;i++)
-    {
-        do
-        {
-           randal = rand() % MAX;
-        }
-        while(randal < MIN);
-
-       	buf[i] = randal;
-    }
 	
-	generateFile(buf);
+	int i;
 	
-    return 0;
+	for(i = 0;i < sizeof(__DATALL);i++){
+		buf01[i] = __DATALL[rand() % sizeof(__DATALL) - 1];
+	}	
+	generateFile();
 }
 
-void generateFile(const char *buf)
-{
+void generateFile(){
 	FILE *file;
-	
 	file = fopen("password.txt","w");
-	
-	fprintf(file,"%s",buf);
+	fprintf(file,"%s",buf01);
 	fclose(file);
 }
