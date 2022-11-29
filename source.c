@@ -7,14 +7,16 @@
 #define MIN 33
 #define LEN 10
 
+void generateFile(const char *buf);
 int main()
 {
+	
+	static char buf[LEN];
     setlocale(LC_ALL,"");
     srand(time(NULL));
 
     int i;
     int randal;
-    printf("\nPassword:");
 
     for(i = 0; i < LEN;i++)
     {
@@ -24,7 +26,20 @@ int main()
         }
         while(randal < MIN);
 
-        printf("%c",randal);
+       	buf[i] = randal;
     }
+	
+	generateFile(buf);
+	
     return 0;
+}
+
+void generateFile(const char *buf)
+{
+	FILE *file;
+	
+	file = fopen("password.txt","w");
+	
+	fprintf(file,"%s",buf);
+	fclose(file);
 }
